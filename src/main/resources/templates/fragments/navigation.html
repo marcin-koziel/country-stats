@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<nav th:fragment="nav-public" id="navbar-override" class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+    <div id="container-fluid-override" class="container-fluid">
+        <a class="navbar-brand" href="/">CountryPosts</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li id="all-posts" class="nav-item">
+                    <a class="nav-link" href="/all-posts">All Posts</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/categories/agriculture">Agriculture</a></li>
+                        <li><a class="dropdown-item" href="/categories/communications">Communications</a></li>
+                        <li><a class="dropdown-item" href="/categories/construction">Construction</a></li>
+                        <li><a class="dropdown-item" href="/categories/finance">Finance</a></li>
+                        <li><a class="dropdown-item" href="/categories/manufacturing">Manufacturing</a></li>
+                        <li><a class="dropdown-item" href="/categories/mining">Mining</a></li>
+                        <li><a class="dropdown-item" href="/categories/retail">Retail</a></li>
+                        <li><a class="dropdown-item" href="/categories/transportation">Transportation</a></li>
+                        <li><a class="dropdown-item" href="/categories/utilities">Utilities</a></li>
+                    </ul>
+                </li>
+                <li id="sign-in" class="nav-item">
+                    <a class="nav-link" href="/login">Sign-In</a>
+                </li>
+            </ul>
+            <form class="d-flex" th:action="@{/results}">
+                <input class="form-control me-2" type="search" th:name="tag" placeholder="Search Post By Tag" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<nav th:fragment="nav-private" id="navbar-override" class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+    <div id="container-fluid-override" class="container-fluid">
+        <a class="navbar-brand" href="/">CountryPosts</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li id="all-posts" class="nav-item">
+                    <a class="nav-link" href="/all-posts">All Posts</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/categories/agriculture">Agriculture</a></li>
+                        <li><a class="dropdown-item" href="/categories/communications">Communications</a></li>
+                        <li><a class="dropdown-item" href="/categories/construction">Construction</a></li>
+                        <li><a class="dropdown-item" href="/categories/finance">Finance</a></li>
+                        <li><a class="dropdown-item" href="/categories/manufacturing">Manufacturing</a></li>
+                        <li><a class="dropdown-item" href="/categories/mining">Mining</a></li>
+                        <li><a class="dropdown-item" href="/categories/retail">Retail</a></li>
+                        <li><a class="dropdown-item" href="/categories/transportation">Transportation</a></li>
+                        <li><a class="dropdown-item" href="/categories/utilities">Utilities</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:text="${#authentication.getName()}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Username
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a sec:authorize="hasRole('ADMIN')" class="dropdown-item" href="/admin/posts/create">New Post</a></li>
+                        <li><a sec:authorize="hasRole('ADMIN')" class="dropdown-item" href="/admin/posts">Edit Posts</a></li>
+                        <div sec:authorize="hasRole('ADMIN')" class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" th:action="@{/results}">
+                <input class="form-control me-2" type="search" th:name="tag" placeholder="Search Post By Tag" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div th:fragment="nav-user"></div>
+
+<div th:fragment="nav-admin"></div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head :: head(title=${title})">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div th:replace="fragments/banner :: banner (title=${title})"></div>
+
+    <nav sec:authorize="isAuthenticated()" th:replace="fragments/navigation :: nav-private"></nav>
+    <nav sec:authorize="isAnonymous()" th:replace="fragments/navigation :: nav-public"></nav>
+
+    <div th:replace="fragments/filters :: basic-filter"></div>
+    <div class="content">
+        <div th:replace="fragments/posts :: postsBody(postsData=${postsData})"></div>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

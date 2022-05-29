@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head :: head(title=${title})">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <div class="admin-controls">
+        <a class="btn btn-primary me-5" th:href="@{/admin/posts/create}">New Post</a>
+        <a class="btn btn-secondary" th:href="@{/}">Go Home</a>
+    </div>
+
+    <table class="table admin-table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Category</th>
+            <th scope="col">Country</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Content</th>
+            <th scope="col">DateTime</th>
+            <th scope="col">Tags</th>
+            <th scope="col">Sources</th>
+            <th scope="col">Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${postsData}">
+            <td th:text="${post.id}">ID</td>
+            <td th:text="${post.postType.name}">Category</td>
+            <td th:text="${post.countryType.name}">Country</td>
+            <td th:text="${post.title}">Title</td>
+            <td th:text="${post.author}">Author</td>
+            <td th:text="${#strings.abbreviate(post.content, 150)}">Content</td>
+            <td th:text="${#temporals.format(post.localDateTime)}">Date</td>
+            <td>
+                <div th:each="tag, tagStat : ${post.tags}">
+                    <span th:text="${tag.getName()}">Tag</span>
+                    <span th:if="${tagStat.index + 1 != tagStat.size}">,</span>
+                </div>
+            </td>
+            <td style="max-width: 100px; overflow-wrap: break-word">
+                <span th:each="source : ${post.sources}" th:text="${#strings.abbreviate(source.url, 30)}"></span>
+            </td>
+            <td>
+                <a th:href="@{/admin/posts/edit/} + ${post.id}">Edit</a>
+                <a th:href="@{/admin/posts/delete/} + ${post.id}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

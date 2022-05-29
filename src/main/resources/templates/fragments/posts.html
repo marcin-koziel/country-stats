@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div class="post-container" th:fragment="postsBody (postsData)">
+        <div class="d-flex flex-column post" th:each="post : ${postsData}">
+            <div class="post-banner">
+                <div class="post-title" th:text="${post.title}"></div>
+                <div class="post-banner-background"></div>
+                <div class="post-image">
+                    <img th:src="${post.image.imagePath}"/>
+                </div>
+            </div>
+            <div class="d-flex flex-row">
+                <div th:each="tag : ${post.tags}">
+                    <div class="post-tag me-2 px-2" th:text="${tag.name}"></div>
+                </div>
+            </div>
+            <div class="post-content" th:text="${post.content}"></div>
+            <div class="d-flex flex-row">
+                <div class="post-author me-3" th:text="|Author: ${post.author}|"></div>
+                <div class="post-date" th:text="|Date Posted: ${#temporals.format(post.localDateTime)}|"></div>
+            </div>
+            <div th:each="source : ${post.sources}">
+                <a class="post-reference" th:text="${source.text}" th:href="${source.url}"></a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

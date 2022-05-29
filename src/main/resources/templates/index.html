@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head :: head(title=${title})">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<header class="d-flex flex-column justify-content-center align-items-center h-25">
+    <h1>CountryPosts</h1>
+    <h2>Midterm 2022</h2>
+    <h4>PROG39599 Advanced Java Frameworks</h4>
+    <nav sec:authorize="isAuthenticated()" th:replace="fragments/navigation :: nav-private"></nav>
+    <nav sec:authorize="isAnonymous()" th:replace="fragments/navigation :: nav-public"></nav>
+</header>
+
+<div class="d-flex flex-column justify-content-center align-items-center h-50">
+
+    <div class="d-flex flex-column category-tiles">
+        <div class="d-flex flex-row category-row">
+            <div class="category-tile">
+                <a href="categories/agriculture">
+                    <span>Agriculture</span>
+                    <img th:src="@{images/agriculture.jpg}" th:alt="agriculture" alt="" src=""/>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="categories/communications">
+                    <span>Communications</span>
+                    <img th:src="@{images/communications.jpg}" th:alt="communications" alt="" src=""/>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="categories/construction">
+                    <span>Construction</span>
+                    <img th:src="@{images/construction.jpg}" th:alt="construction" alt="" src=""/>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-row category-row">
+            <div class="category-tile">
+                <a href="categories/finance">
+                    <span>Finance</span>
+                    <img th:src="@{images/finance.jpg}" th:alt="finance" alt="" src=""/>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="categories/manufacturing">
+                    <span>Manufacturing</span>
+                    <img th:src="@{images/manufacturing.jpg}" th:alt="manufacturing" alt="" src=""/>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="categories/mining">
+                    <span>Mining</span>
+                    <img th:src="@{images/mining.jpg}" th:alt="mining" alt="" src=""/>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-row category-row">
+            <div class="category-tile">
+                <a href="categories/retail">
+                    <span>Retail</span>
+                    <img th:src="@{images/retail.jpg}" th:alt="retail" alt="" src=""/>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="categories/transportation">
+                    <span>Transportation</span>
+                    <img th:src="@{images/transportation.jpg}" th:alt="transportation" alt="" src=""/>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="categories/utilities">
+                    <span>Utilities</span>
+                    <img th:src="@{images/utilities.jpg}" th:alt="utilities" alt="" src=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="d-flex justify-content-center align-items-center h-25">
+    <p>Marcin Koziel - #991377867</p>
+</footer>
+</body>
+</html>
